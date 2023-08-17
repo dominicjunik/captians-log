@@ -32,6 +32,16 @@ app.get('/logs', async (req, res) => {
 })
 
 // show
+app.get('/logs/:id', async (req, res) => {
+    try {
+        let log = await Log.findById(req.params.id)
+        res.render('Show', { log })
+    } catch(err) {
+        console.log(err.message)
+        res.send('not found')
+    }
+    
+})
 // new
 app.get('/logs/new', (req, res) => {
     res.render('New')
