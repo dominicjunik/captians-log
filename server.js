@@ -64,7 +64,28 @@ app.post('/logs', async (req, res) => {
 })
 
 // edit
+app.get('/logs/:id/edit', async (req, res) => { 
+    try {
+        let log = await Log.findById(req.params.id)
+        res.render('Edit', { log })
+    } catch(err) {
+        console.log(err.message)
+        res.send('broken edit page')
+    }
+    
+})
 // update
+app.patch('/logs/:id', async (req, res) => {
+    req.body.shipIsBroken = (req.body.shipIsBroken === 'on') 
+    try {
+        await Log.findByIdAndUpdate(req.params.id, {
+            ...req.body
+        })
+        res.redirect(`/logs/${req.params.id}`)
+    }catch(err) {
+        console.log(err.message)
+    }
+})
 // destroy
 app.delete('/logs/:id', async (req, res) => {
     try {

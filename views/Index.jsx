@@ -13,6 +13,9 @@ export default function Index({ logs }){
                     <form action={`/logs/${log._id}?_method=DELETE`} method="POST">
                         <button>X</button>
                     </form>
+                    <form action={`/logs/${log._id}/edit`} method="GET">
+                        <button>Edit</button>
+                    </form>
                 </li>)}
             </ul>
 
