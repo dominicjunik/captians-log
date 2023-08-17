@@ -14,8 +14,12 @@ mongoConfig()
 
 const jsxEngine = require('jsx-view-engine')
 
+const methodOverride = require('method-override')
+
 app.set('view engine', 'jsx')
 app.engine('jsx', jsxEngine())
+
+app.use(methodOverride('_method'))
 
 app.use(express.urlencoded({ extended: true }))
 // routes
@@ -31,6 +35,11 @@ app.get('/logs', async (req, res) => {
     
 })
 
+// new
+app.get('/logs/new', (req, res) => {
+    res.render('New')
+})
+
 // show
 app.get('/logs/:id', async (req, res) => {
     try {
@@ -42,10 +51,7 @@ app.get('/logs/:id', async (req, res) => {
     }
     
 })
-// new
-app.get('/logs/new', (req, res) => {
-    res.render('New')
-})
+
 // create
 app.post('/logs', async (req, res) => {
     req.body.shipIsBroken = (req.body.shipIsBroken === 'on') 
@@ -60,6 +66,14 @@ app.post('/logs', async (req, res) => {
 // edit
 // update
 // destroy
+app.delete('/logs/:id', async (req, res) => {
+    try {
+        await Log.findByIdAndDelete(req.params.id)
+    } catch(err) {
+        console.log(err.message)
+    }
+    res.redirect('/logs')
+})
 
 
 
