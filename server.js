@@ -1,8 +1,16 @@
 const express = require('express')
 
+const Log = require('./models/Logs')
+
+require('dotenv').config()
+
+const mongoConfig = require('./config')
+
 const app = express()
 
-const PORT = 8080
+const PORT = 8080;
+
+mongoConfig()
 
 const jsxEngine = require('jsx-view-engine')
 
@@ -13,16 +21,30 @@ app.use(express.urlencoded({ extended: true }))
 // routes
 
 // index
-app.get('/logs', (req, res) => {
-    res.render('New')
+app.get('/logs', async (req, res) => {
+    try {
+        let logs = await Log.find()
+        res.render('Index', { logs })
+    } catch(err) {
+        console.log(err.message)
+    }
+    
 })
 
 // show
 // new
+app.get('/logs/new', (req, res) => {
+    res.render('New')
+})
 // create
-app.post('/logs', (req, res) => {
+app.post('/logs', async (req, res) => {
     req.body.shipIsBroken = (req.body.shipIsBroken === 'on') 
-    res.send(req.body)
+    try {
+        await Log.create(req.body)
+    } catch(err) {
+        console.log(err.message)
+    }
+    res.redirect('/logs')
 })
 
 // edit
