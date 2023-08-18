@@ -53,9 +53,7 @@ module.exports.edit = async (req, res) => {
 module.exports.update = async (req, res) => {
     req.body.shipIsBroken = (req.body.shipIsBroken === 'on') 
     try {
-        await Log.findByIdAndUpdate(req.params.id, {
-            ...req.body
-        })
+        await Log.findByIdAndUpdate(req.params.id, req.body)
         res.redirect(`/logs/${req.params.id}`)
     }catch(err) {
         console.log(err.message)

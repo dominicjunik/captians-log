@@ -4,7 +4,7 @@ const Edit = ({ log }) => {
   return (
     <div>
         <h1>Edit</h1>
-        <form action={`/logs/${log._id}?_method=PATCH`} method="POST">
+        <form action={`/logs/${log._id}?_method=PUT`} method="POST">
                 <label htmlFor="title">Title:</label>
                 <input type="text" id='title' name='title' value={log.title}/>
 
