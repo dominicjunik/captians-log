@@ -3,7 +3,7 @@ import React from "react";
 export default function Index({ logs }){
     return (
         <div>
-            <h1>'index'</h1>
+            <h1>Captians Log</h1>
             <ul>
                 {logs.map((log) => 
                 <li key={log._id}>

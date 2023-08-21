@@ -12,6 +12,7 @@ const PORT = 8080;
 
 mongoConfig()
 const logsRoutes = require('./routes/logRoutes')
+const commentRoutes = require('./routes/commentRoutes')
 
 const jsxEngine = require('jsx-view-engine')
 
@@ -25,6 +26,7 @@ app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
 // routes
 app.use('/logs', logsRoutes)
+app.use('/comments', commentRoutes)
 
 
 

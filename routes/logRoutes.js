@@ -19,8 +19,10 @@ router.post('/', logsController.create)
 
 // edit
 router.get('/:id/edit', logsController.edit)
+
 // update
 router.put('/:id', logsController.update)
+
 // destroy
 router.delete('/:id', logsController.delete)
 

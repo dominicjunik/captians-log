@@ -18,7 +18,7 @@ module.exports.new = (req, res) => {
 // show
 module.exports.show = async (req, res) => {
     try {
-        let log = await Log.findById(req.params.id)
+        let log = await Log.findById(req.params.id).populate('comments')
         res.render('Show', { log })
     } catch(err) {
         console.log(err.message)
