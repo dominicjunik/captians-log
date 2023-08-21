@@ -5,19 +5,19 @@ const router = express.Router()
 const commentControl = require('../controllers/commentController')
 
 // index
-router.get('/:postId', commentControl.index)
+router.get('/:logId', commentControl.index)
 
 // delete
-router.delete('/:postId/:commentId', commentControl.delete)
+router.delete('/:logId/:commentId', commentControl.delete)
 
 // update
-router.put('/:postId/:commentId', commentControl.update)
+router.put('/:logId/:commentId', commentControl.update)
 
 // create
-router.post('/:postId', commentControl.create)
+router.post('/:logId', commentControl.create)
 
 // show
-router.get('/:postId/:commentId', commentControl.show)
+router.get('/:logId/:commentId', commentControl.show)
 
 
 module.exports = router
